@@ -1,4 +1,6 @@
-<?php require_once('header.php'); ?>
+<?php require_once('header.php');
+session_start();
+ ?>
 <body class="add">
 <div class="container inner saved">
 <header class="masthead mb-auto">
@@ -8,6 +10,7 @@
         <a class="nav-link" href="index.php">Home</a>
         <a class="nav-link" href="add.php">Share Your Tune</a>
         <a class="nav-link" href="view.php">View Playlists</a>
+        <a class="new link" href="forget.php">Forget Session</a>
       </nav>
     </div>
   </header>
@@ -16,6 +19,7 @@
     <?php
 
     $first_name = filter_input(INPUT_POST, 'fname');
+    $_SESSION['fname'] = $first_name;
     $last_name = filter_input(INPUT_POST, 'lname');
     $genre = filter_input(INPUT_POST, 'genre');
     $location = filter_input(INPUT_POST, 'location');
@@ -121,8 +125,12 @@
             // execute the insert
             $statement->execute();
 
-            // show message
-            echo "<p> Song added! Thanks for sharing! </p>";
+            if(isset($_SESSION['fname'])){
+                echo"<p>song added!now listen and enjoy it ".$_SESSION['fname']."!</p>";
+            }
+            else{
+            echo "<p> Song added!now listen and enjoy it </p>";
+            }
 
             // disconnecting
             $statement->closeCursor();

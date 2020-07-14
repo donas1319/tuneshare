@@ -1,4 +1,6 @@
-<?php require_once('header.php'); ?>
+<?php require_once('header.php');
+session_start();
+?>
 <body class="add">
 <div class="container inner">
 <header class="masthead mb-auto">
@@ -8,6 +10,7 @@
         <a class="nav-link" href="index.php">Home</a>
         <a class="nav-link" href="add.php">Share Your Tune</a>
         <a class="nav-link" href="view.php">View Playlists</a>
+        <a class="nav-link" href="forget.php">Forget Session</a>
       </nav>
     </div>
   </header>
@@ -58,7 +61,14 @@
     }
     ?>
     <main>
-    <h1>Share Your Fave Tunes</h1>
+    <?php
+    if (isset($_SESSION['fname'])){
+    echo'<h1 class="cover-heading">Share your Favourite Tunes '.$_SESSION['fname']. '!</h1>';
+    }else{
+    echo'<h1>Share Your Favourite Tunes</h1>';
+  }
+  ?>
+    
       <form action="process.php" method="post" enctype="multipart/form-data" class="form">
         <!-- add hidden input with user id if editing -->
         <input type="hidden" name="user_id" value="<?php echo $id;?>">

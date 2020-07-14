@@ -1,4 +1,6 @@
-<?php require_once('header.php'); ?>
+<?php require_once('header.php'); 
+session_start();
+?>
 <body class="view">
 <div class="container inner">
 <header class="masthead mb-auto">
@@ -8,6 +10,7 @@
         <a class="nav-link" href="index.php">Home</a>
         <a class="nav-link" href="add.php">Share Your Tune</a>
         <a class="nav-link" href="view.php">View Playlists</a>
+        <a class="nav-link" href="forget.php">Forget Session</a>
       </nav>
     </div>
   </header>
@@ -29,6 +32,12 @@
     $records = $statement->fetchAll(); 
 
     // echo out the top of the table 
+
+    if (isset($_SESSION['fname'])){
+      echo'<h1 clss="cover-heading">viewing playlist '.$_SESSION['fname']. '!</h1>';
+    }else{
+      echo'<h1 class ="cover-heading">viewing playlist</h1>';
+    }
 
     echo "<table class='table'>";
 
